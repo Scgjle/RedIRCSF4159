@@ -8,11 +8,14 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.Drive;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.LiftArm;
+import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /**
@@ -24,9 +27,12 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
 
   private final Drivetrain drivetrain = new Drivetrain();
-  private final Joystick lefJoystick = new Joystick(1);
-  private final Joystick righJoystick = new Joystick(2);
+  private final Joystick righJoystick = new Joystick(1);
+  private final Joystick lefJoystick = new Joystick(2);
   private final Drive drive = new Drive(drivetrain, righJoystick, lefJoystick);
+  private final Arm arm = new Arm();
+  private JoystickButton armUpButton = new JoystickButton(lefJoystick, 4);
+  private JoystickButton armDownButton = new JoystickButton(lefJoystick, 5);
 
 
 
@@ -57,6 +63,8 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
+    armUpButton.whileTrue(new LiftArm(arm,0.3));
+    armDownButton.whileTrue(new LiftArm(arm, -0.3));
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     new Trigger(m_exampleSubsystem::exampleCondition)
         .onTrue(new ExampleCommand(m_exampleSubsystem));
