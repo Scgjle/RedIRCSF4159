@@ -7,11 +7,12 @@ package frc.robot;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
 import frc.robot.commands.Drive;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.commands.LiftArm;
+import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -31,9 +32,12 @@ public class RobotContainer {
   private final Joystick lefJoystick = new Joystick(2);
   private final Drive drive = new Drive(drivetrain, righJoystick, lefJoystick);
   private final Arm arm = new Arm();
+  private final Shooter motor = new Shooter();
   private JoystickButton armUpButton = new JoystickButton(lefJoystick, 4);
   private JoystickButton armDownButton = new JoystickButton(lefJoystick, 5);
-
+  private JoystickButton moveinbutton = new JoystickButton(righJoystick, 1);
+  private JoystickButton moveoutbutton = new JoystickButton(lefJoystick, 1);
+  /// ADD JOYSTICK PLEASE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA FOR SDOOTER
 
 
   // The robot's subsystems and commands are defined here...
@@ -63,11 +67,11 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    armUpButton.whileTrue(new LiftArm(arm,0.3));
-    armDownButton.whileTrue(new LiftArm(arm, -0.3));
+    armUpButton.whileTrue(new LiftArm(arm,0.2));
+    armDownButton.whileTrue(new LiftArm(arm, -0.2));
+    moveinbutton.whileTrue(new Shoot(motor, 0.3));
+    moveoutbutton.whileTrue(new Shoot(motor, -0.3));
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
