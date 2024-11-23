@@ -6,6 +6,7 @@ package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.Autos;
+import frc.robot.commands.BasicAuto;
 import frc.robot.commands.Drive;
 import frc.robot.commands.LiftArm;
 import frc.robot.commands.Shoot;
@@ -28,16 +29,15 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 public class RobotContainer {
 
   private final Drivetrain drivetrain = new Drivetrain();
-  private final Joystick righJoystick = new Joystick(1);
-  private final Joystick lefJoystick = new Joystick(2);
+  private final Joystick righJoystick = new Joystick(2);
+  private final Joystick lefJoystick = new Joystick(1);
   private final Drive drive = new Drive(drivetrain, righJoystick, lefJoystick);
   private final Arm arm = new Arm();
   private final Shooter motor = new Shooter();
-  private JoystickButton armUpButton = new JoystickButton(lefJoystick, 4);
-  private JoystickButton armDownButton = new JoystickButton(lefJoystick, 5);
+  private JoystickButton armUpButton = new JoystickButton(lefJoystick, 3);
+  private JoystickButton armDownButton = new JoystickButton(righJoystick, 3);
   private JoystickButton moveinbutton = new JoystickButton(righJoystick, 1);
   private JoystickButton moveoutbutton = new JoystickButton(lefJoystick, 1);
-  /// ADD JOYSTICK PLEASE AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA FOR SDOOTER
 
 
   // The robot's subsystems and commands are defined here...
@@ -69,8 +69,8 @@ public class RobotContainer {
   private void configureBindings() {
     armUpButton.whileTrue(new LiftArm(arm,0.2));
     armDownButton.whileTrue(new LiftArm(arm, -0.2));
-    moveinbutton.whileTrue(new Shoot(motor, 0.3));
-    moveoutbutton.whileTrue(new Shoot(motor, -0.3));
+    moveinbutton.whileTrue(new Shoot(motor, 0.5));
+    moveoutbutton.whileTrue(new Shoot(motor, -0.5));
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
@@ -85,6 +85,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return new BasicAuto(drivetrain, arm, motor);
   }
 }
