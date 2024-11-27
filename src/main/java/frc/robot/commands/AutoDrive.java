@@ -8,8 +8,8 @@ public class AutoDrive extends Command{
 
     public AutoDrive (Drivetrain drivetrain, double leftsped, double rightsped){
         drivet = drivetrain;
-        leftsped = leftspeed;
-        rightsped = rightspeed;
+        leftspeed = leftsped;
+        rightspeed = rightsped;
         addRequirements(drivetrain);
     }
 

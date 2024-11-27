@@ -17,7 +17,7 @@ public class Drive extends Command{
 
     @Override
     public void execute(){
-        drivetrain.drive(leftJoystick.getY(), rightJoystick.getY());
+        drivetrain.drive(-leftJoystick.getY(), -rightJoystick.getY());
     }
 
     @Override

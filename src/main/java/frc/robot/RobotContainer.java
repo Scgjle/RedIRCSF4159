@@ -34,8 +34,8 @@ public class RobotContainer {
   private final Drive drive = new Drive(drivetrain, righJoystick, lefJoystick);
   private final Arm arm = new Arm();
   private final Shooter motor = new Shooter();
-  private JoystickButton armUpButton = new JoystickButton(lefJoystick, 3);
-  private JoystickButton armDownButton = new JoystickButton(righJoystick, 3);
+  private JoystickButton armDownButton = new JoystickButton(lefJoystick, 3);
+  private JoystickButton armUpButton = new JoystickButton(righJoystick, 3);
   private JoystickButton moveinbutton = new JoystickButton(righJoystick, 1);
   private JoystickButton moveoutbutton = new JoystickButton(lefJoystick, 1);
 
