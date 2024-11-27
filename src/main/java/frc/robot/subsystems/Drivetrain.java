@@ -10,8 +10,8 @@ public class Drivetrain extends SubsystemBase{
     //Constructor
     public Drivetrain(){
         // set peramitor to motor connection
-        leftMotor = new VictorSP(0);
-        rightMotor = new VictorSP(1);
+        leftMotor = new VictorSP(1);
+        rightMotor = new VictorSP(0);
         // inverts left motor
         rightMotor.setInverted(true);
     }
