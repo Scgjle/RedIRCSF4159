@@ -11,23 +11,14 @@ public class BasicAuto extends SequentialCommandGroup{
     public BasicAuto(Drivetrain drivetrain, Arm arm,Shooter shooter){
 
         addCommands(
+            //shoots the ball
+            new Shoot(shooter, 1).withTimeout(1),
 
-            // lift arm to match hight of top port
-            new LiftArm(arm, 0.3).withTimeout(1),
-    
-            //begining of match, despences pre-loaded balls
-            new Shoot(shooter, 1).withTimeout(3),
-            
-            //move backwards, away from chargeport
-            new AutoDrive(drivetrain, -0.25, -0.25).withTimeout(2),
+            //moves the robot left
+            new AutoDrive(drivetrain, -0.2, 0.2).withTimeout(1),
 
-            // turn right 
-            new AutoDrive(drivetrain, -0.25, 0.25).withTimeout(1),
-
-            new WaitCommand(3),
-
-            //despence ball
-            new Shoot(shooter, 5).withTimeout(2)
+            //moves robot back to original position
+            new AutoDrive(drivetrain, 0.2, -0.2).withTimeout(1)
         );
     }
 }
