@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package main.java.frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
