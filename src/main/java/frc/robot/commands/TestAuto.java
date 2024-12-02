@@ -6,22 +6,25 @@ import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
 
-public class BasicAuto extends SequentialCommandGroup{
+public class TestAuto extends SequentialCommandGroup{
              
     public TestAuto(Drivetrain drivetrain, Arm arm,Shooter shooter){
 
         addCommands(
+            // robot waits for 3 seconds before moving
+           new WaitCommand(3),
+
             //shoots the ball
-            new Shoot(shooter, 1).withTimeout(1),
+           // new Shoot(shooter, 1).withTimeout(1),
 
-            //lifts arm or pivits shooter
-            new LiftArm(arm, 0.2).withTimeout(1),
+            //turns
+             new AutoDrive(drivetrain, 0.35, -0.35) .withTimeout(2.78),
 
-            //moves the robot left
-            new AutoDrive(drivetrain, -0.2, 0.2).withTimeout(1),
+            //lifts arm
+            new LiftArm(arm, 0.25) .withTimeout(2),
 
-            //moves robot back to original position
-            new AutoDrive(drivetrain, 0.2, -0.2).withTimeout(1)
+            //turns back 
+            new AutoDrive(drivetrain, -0.35, 0.35) .withTimeout(2.78)
         );
     }
 }
